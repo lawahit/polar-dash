@@ -1,40 +1,45 @@
-# Terreno procedural natural: random walk suavizado + onda sinusoidal para curvas orgánicas, pendientes gentiles (~15° máx) y colinas climbables sin saltos.
-# Textura tiled con offset scrolling para suelo infinito realista (e.g., nieve). Se expande dinámicamente con colisiones precisas.
-# Correcciones Godot 4: sin texture_mode (usar texture_scale para tiling), PackedVector2Array correcto, variable texture renombrada para evitar conflicto con Line2D.
+# Terreno Procedural con Curvas Suaves
+# ------------------------------------------------------------------------------
+# Genera un suelo infinito utilizando ruido aleatorio suavizado y ondas sinusoidales
+# para crear colinas orgánicas y navegables.
+# Utiliza Polygon2D con texturas tileables y gestión de memoria (pool) para rendimiento.
+# ------------------------------------------------------------------------------
 extends Line2D
 
-# PARÁMETROS AJUSTADOS PARA TERRENO MÁS LISO
-var slice := 11                    # Ancho segmento (px): MAYOR = más liso (menos segmentos por distancia)
-var max_dy := 3.0                   # ΔY máx por segmento: MENOR = menos cambios bruscos (reducido de 6.0)
-var segments_per_batch := 120        # Segmentos por lote: ajustado por slice mayor
-var smoothness := 0.85               # Suavizado dy: MAYOR = transiciones más graduales (aumentado de 0.7)
-var terrain_height_limit := 1000      # Altura máx desde fondo: zona jugable inferior.
-var bottom_margin := 8               # Margen inferior: evita bordes duros.
+# --- Parámetros de Generación de Terreno ---
+# Controlan la suavidad y forma del terreno
+var slice := 11 # Ancho de cada segmento en píxeles. Mayor = más polígonos pero menos puntos.
+var max_dy := 3.0 # Variación máxima de altura aleatoria por segmento.
+var segments_per_batch := 120 # Cantidad de puntos generados por cada "tramo" de terreno.
+var smoothness := 0.85 # Factor de suavizado (lerp). Mayor (cercano a 1.0) = terreno más liso.
+var terrain_height_limit := 1000 # Límite inferior de la altura del polígono (zona visual de tierra).
+var bottom_margin := 8 # Margen de seguridad en la parte inferior de la pantalla.
 
-# PARÁMETROS ADICIONALES PARA CONTROL DE SUAVIDAD
-var wave_amplitude := 1.5           # Amplitud de onda sinusoidal: MENOR = menos ondulación
-var wave_frequency := 800.0          # Frecuencia de onda: MAYOR = ondulación más larga y suave (aumentado de 250.0)
-var random_influence := 0.4          # Influencia del random: MENOR = menos aleatoriedad (0.0 a 1.0)
+# --- Control de Ondulación ---
+# Define la forma general de las colinas usando ondas sinusoidales
+var wave_amplitude := 1.5 # Altura de las ondas base.
+var wave_frequency := 800.0 # Frecuencia de la onda. Mayor = colinas más anchas.
+var random_influence := 0.4 # Peso de la aleatoriedad vs la onda suave (0.0 a 1.0).
 
-var ground_texture: Texture2D = preload("res://assets/ice desert background/ground_textura_final.png")  # Ruta a tu textura tileable (nieve/hierba). Renombrado para evitar conflicto con Line2D.texture.
+var ground_texture: Texture2D = preload("res://assets/ice desert background/ground_textura_final.png") # Ruta a tu textura tileable (nieve/hierba). Renombrado para evitar conflicto con Line2D.texture.
 var screensize: Vector2
 var terrin: Array[Vector2] = []
-var poly: PackedVector2Array         # Array para polígono: usa PackedVector2Array (Godot 4 estándar).
+var poly: PackedVector2Array # Array para polígono: usa PackedVector2Array (Godot 4 estándar).
 var static_body: StaticBody2D
 var shape: CollisionPolygon2D
 var ground: Polygon2D
 @onready var player = get_node("../CharacterBody2D")
 
 # Variables para optimización
-var barrels_pool: Array = []  # Pool de barriles reutilizables
-var max_barrels_in_pool: int = 20  # Máximo de barriles en pool
-var active_barrels: Array = []  # Barriles activos en escena
-var barrel_scene = preload("res://entities/barrel/Barrel.tscn")  # Precargar una vez
-var last_cleanup_x: float = 0.0  # Última posición X donde se hizo limpieza
-var cleanup_distance: float = 500.0  # Distancia entre limpiezas
-var max_terrain_points: int = 1000  # Máximo de puntos de terreno a mantener
-var terrain_cleanup_threshold: int = 500  # Cuántos puntos eliminar cuando se excede el máximo
-var needs_polygon_rebuild: bool = false  # Bandera para indicar que necesita reconstrucción
+var barrels_pool: Array = [] # Pool de barriles reutilizables
+var max_barrels_in_pool: int = 20 # Máximo de barriles en pool
+var active_barrels: Array = [] # Barriles activos en escena
+var barrel_scene = preload("res://entities/barrel/Barrel.tscn") # Precargar una vez
+var last_cleanup_x: float = 0.0 # Última posición X donde se hizo limpieza
+var cleanup_distance: float = 500.0 # Distancia entre limpiezas
+var max_terrain_points: int = 1000 # Máximo de puntos de terreno a mantener
+var terrain_cleanup_threshold: int = 500 # Cuántos puntos eliminar cuando se excede el máximo
+var needs_polygon_rebuild: bool = false # Bandera para indicar que necesita reconstrucción
 
 # Inicializa: aleatoriedad, pantalla, colisión estática y Polygon2D con textura tiled (eficiente, Godot 4).
 func _ready():
@@ -49,7 +54,7 @@ func _ready():
 	ground = Polygon2D.new()
 	ground.texture = ground_texture
 	# Godot 4: no texture_mode; usa scale para tiling (0.08 = tiles ~12px si textura 96px).
-	ground.texture_scale = Vector2(0.08, 0.08)  # Ajusta para tu textura (más pequeño = tiles más finos/detallados).
+	ground.texture_scale = Vector2(0.08, 0.08) # Ajusta para tu textura (más pequeño = tiles más finos/detallados).
 	add_child(ground)
 	
 	# Precalentar pool de barriles
@@ -58,7 +63,7 @@ func _ready():
 	generate_initial_terrain()
 
 # Por frame: genera más si jugador cerca (lookahead 120% pantalla para cero pop-in).
-func _process(delta):
+func _process(_delta):
 	if terrin.size() == 0 or player == null: return
 	
 	# Limpieza periódica de terreno y barriles fuera de pantalla
@@ -76,7 +81,7 @@ func _process(delta):
 
 # Precalentar pool de barriles para reutilización
 func prewarm_barrel_pool():
-	for i in range(5):  # Crear algunos barriles iniciales
+	for i in range(5): # Crear algunos barriles iniciales
 		var barrel = barrel_scene.instantiate()
 		barrel.visible = false
 		barrel.process_mode = Node.PROCESS_MODE_DISABLED
@@ -101,17 +106,16 @@ func return_barrel_to_pool(barrel: Node):
 		barrel.process_mode = Node.PROCESS_MODE_DISABLED
 		barrels_pool.append(barrel)
 	else:
-		barrel.queue_free()  # Eliminar si el pool está lleno
+		barrel.queue_free() # Eliminar si el pool está lleno
 
 # Limpiar elementos fuera de pantalla
 func cleanup_off_screen_elements():
 	if player == null:
 		return
 	
-	var cleanup_x = player.position.x - screensize.x * 2  # 2 pantallas atrás
+	var cleanup_x = player.position.x - screensize.x * 2 # 2 pantallas atrás
 	
 	# 1. Limpiar barriles fuera de pantalla
-	var barrels_to_remove: Array = []
 	for i in range(active_barrels.size() - 1, -1, -1):
 		var barrel = active_barrels[i]
 		if barrel and is_instance_valid(barrel):
@@ -127,9 +131,9 @@ func cleanup_off_screen_elements():
 		
 		# Eliminar puntos del principio
 		var removed_points = 0
-		while removed_points < points_to_remove and terrin.size() > 10:  # Mantener al menos 10 puntos
+		while removed_points < points_to_remove and terrin.size() > 10: # Mantener al menos 10 puntos
 			terrin.remove_at(0)
-			remove_point(0)  # Line2D
+			remove_point(0) # Line2D
 			removed_points += 1
 		
 		# Marcar que necesitamos reconstruir el polígono
@@ -187,10 +191,10 @@ func generate_initial_terrain():
 func add_hills():
 	var min_y = screensize.y - terrain_height_limit
 	var max_y = screensize.y - bottom_margin
-	var start_x = terrin[-1].x  # Para calcular added_length (scroll textura).
+	var start_x = terrin[-1].x # Para calcular added_length (scroll textura).
 	var last = terrin[-1]
 	var current_pos = last
-	var prev_dy := 0.0  # Inicial para suavizado.
+	var prev_dy := 0.0 # Inicial para suavizado.
 	
 	# Limpiar puntos de cierre anteriores del polígono si existen
 	# Buscar y eliminar puntos de cierre (puntos con Y en screensize.y)
@@ -222,13 +226,13 @@ func add_hills():
 		current_pos = p
 		
 		# Generación de barriles: ~5% probabilidad por segmento
-		if randi() % 50 == 0:  # ~5% probabilidad
+		if randi() % 50 == 0: # ~5% probabilidad
 			var spawn_pos = p - Vector2(0, 20) # justo encima del piso
 			spawn_barrel_at(spawn_pos)
 	
 	# Scroll textura: mueve offset X para tiles continuos sin costuras (ajusta factor si escala cambia).
 	var added_length = terrin[-1].x - start_x
-	ground.texture_offset.x -= added_length * ground.texture_scale.x  # Factor escala para scroll preciso.
+	ground.texture_offset.x -= added_length * ground.texture_scale.x # Factor escala para scroll preciso.
 	
 	# Cerrar polígono CORRECTAMENTE (mismo método que en rebuild_polygon_from_terrain)
 	close_polygon()
