@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://ca6aljkab4vfo"]
+[gd_scene load_steps=13 format=3 uid="uid://ca6aljkab4vfo"]
 
 [ext_resource type="Texture2D" uid="uid://4eeknkg330jw" path="res://Walk/walk01.png" id="1_hqtel"]
 [ext_resource type="Script" uid="uid://bnxr1k50e75d8" path="res://entities/player/player.gd" id="1_sweqy"]
@@ -49,6 +49,8 @@ animations = [{
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_dw050"]
 radius = 14.0
 
+[sub_resource type="Theme" id="Theme_bectd"]
+
 [node name="player" type="CharacterBody2D" groups=["player"]]
 position = Vector2(40, -3)
 script = ExtResource("1_sweqy")
@@ -90,25 +92,17 @@ offset_left = 390.0
 offset_top = 78.0
 offset_right = 476.0
 offset_bottom = 157.0
+theme = SubResource("Theme_bectd")
 
 [node name="Button" type="Button" parent="VBoxContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 50
 action_mode = 0
-button_mask = 0
+button_mask = 1
 text = "      "
 icon = ExtResource("6_2hs0m")
 icon_alignment = 1
 expand_icon = true
-
-[node name="VBoxContainer2" type="VBoxContainer" parent="."]
-offset_left = 383.0
-offset_top = 7.0
-offset_right = 481.0
-offset_bottom = 84.0
-
-[node name="Button" type="Button" parent="VBoxContainer2"]
-layout_mode = 2
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(305, -36)
