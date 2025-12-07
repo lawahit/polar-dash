@@ -10,11 +10,6 @@ func _on_button_pressed() -> void:
 	# NOTA IMPORTANTE: Asegúrate de que la ruta sea correcta. Si 'mapa.tscn' 
 	# está en una subcarpeta, la ruta sería algo como "res://Scenes/mapa.tscn"
 
-# Función llamada cuando el segundo botón ("Options") es presionado.
-func _on_button_2_pressed() -> void:
-	# Dejamos esta función vacía por ahora, tal como lo solicitaste.
-	pass 
-
 # Función llamada cuando el tercer botón ("Exit") es presionado.
 func _on_button_3_pressed() -> void:
 	# Sale del juego. Esto solo funciona en el juego exportado o ejecutado
