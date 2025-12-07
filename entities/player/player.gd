@@ -10,7 +10,7 @@ var slow_force := 0.0
 var last_x := 0.0
 
 @onready var score_label = $ScoreLabel
-@onready var anim = $AnimatedSprite2D   # Referencia a la animación
+@onready var anim = $AnimatedSprite2D # Referencia a la animación
 
 func _ready():
 	add_to_group("player")
@@ -42,8 +42,13 @@ func _physics_process(delta: float) -> void:
 
 	score_label.text = "SCORE: " + str(int(Global.score))
 
+const PAUSE_SCENE = preload("res://ui/overlays/pausa.tscn")
+
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://ui/overlays/pausa.tscn")
+	var pause_instance = PAUSE_SCENE.instantiate()
+	$CanvasLayer.add_child(pause_instance)
+	pause_instance.process_mode = Node.PROCESS_MODE_ALWAYS # Importante para que funcione mientras el juego está pausado
+	get_tree().paused = true
 
 func apply_slow(amount: float, duration: float):
 	slow_force = amount

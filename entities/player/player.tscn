@@ -103,6 +103,7 @@ text = "      "
 icon = ExtResource("6_2hs0m")
 icon_alignment = 1
 expand_icon = true
+flat = true
 
 [node name="CPUParticles2D" type="CPUParticles2D" parent="."]
 position = Vector2(305, -36)

@@ -19,11 +19,9 @@ func _input(event):
 
 # Botón "Continue"
 func _on_button_pressed() -> void:
-	# Como cambiaste de escena, necesitamos volver a cargar el nivel del jugador
-	# OJO: Esto reiniciará el nivel. Si querías un menú de pausa sobre el juego,
-	# no deberías usar change_scene_to_file, sino instanciar este menú sobre el jugador.
-	# Por ahora, volvemos a cargar el player.tscn
-	get_tree().change_scene_to_file("res://scenes/mapa.tscn")
+	# Reanudamos el juego y cerramos este menú emergente.
+	get_tree().paused = false
+	queue_free()
 
 # Botón "Menu"
 func _on_button_2_pressed() -> void:
