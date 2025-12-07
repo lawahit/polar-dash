@@ -45,4 +45,4 @@ func _on_detection_area_body_exited(body):
 func _on_damage_area_body_entered(body):
 	if body.is_in_group("player"):
 		# Enviar al jugador a Game Over - usar call_deferred para evitar problemas de física
-		get_tree().call_deferred("change_scene_to_file", "res://GameOver.tscn")
+		get_tree().call_deferred("change_scene_to_file", "res://ui/overlays/GameOver.tscn")

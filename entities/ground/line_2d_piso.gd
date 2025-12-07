@@ -29,7 +29,7 @@ var ground: Polygon2D
 var barrels_pool: Array = []  # Pool de barriles reutilizables
 var max_barrels_in_pool: int = 20  # Máximo de barriles en pool
 var active_barrels: Array = []  # Barriles activos en escena
-var barrel_scene = preload("res://Barrel.tscn")  # Precargar una vez
+var barrel_scene = preload("res://entities/barrel/Barrel.tscn")  # Precargar una vez
 var last_cleanup_x: float = 0.0  # Última posición X donde se hizo limpieza
 var cleanup_distance: float = 500.0  # Distancia entre limpiezas
 var max_terrain_points: int = 1000  # Máximo de puntos de terreno a mantener

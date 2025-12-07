@@ -1,8 +1,8 @@
 [gd_scene load_steps=12 format=3 uid="uid://ca6aljkab4vfo"]
 
 [ext_resource type="Texture2D" uid="uid://4eeknkg330jw" path="res://Walk/walk01.png" id="1_hqtel"]
-[ext_resource type="Script" uid="uid://bnxr1k50e75d8" path="res://player.gd" id="1_sweqy"]
-[ext_resource type="Script" uid="uid://chs75okksk8p0" path="res://panel.gd" id="2_1jxqw"]
+[ext_resource type="Script" uid="uid://bnxr1k50e75d8" path="res://entities/player/player.gd" id="1_sweqy"]
+[ext_resource type="Script" uid="uid://chs75okksk8p0" path="res://ui/styles/panel.gd" id="2_1jxqw"]
 [ext_resource type="Texture2D" uid="uid://c5ar44a28n2c8" path="res://Walk/walk02.png" id="2_sweqy"]
 [ext_resource type="Texture2D" uid="uid://dnuq3bmw4okwc" path="res://Walk/walk03.png" id="3_2hs0m"]
 [ext_resource type="Texture2D" uid="uid://dt3wglmnud8uq" path="res://assets/penguin_slide02@2x.png" id="3_dw050"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=10 format=3 uid="uid://baicd0o2urbcu"]
 
-[ext_resource type="Script" uid="uid://djw6i5xhyvx8x" path="res://pausa.gd" id="1_i80os"]
+[ext_resource type="Script" uid="uid://djw6i5xhyvx8x" path="res://ui/overlays/pausa.gd" id="1_i80os"]
 [ext_resource type="FontFile" uid="uid://c3raoapdapvl7" path="res://assets/ice desert background/Polar Snow.ttf" id="2_6tq3s"]
 [ext_resource type="Texture2D" uid="uid://jxmt6k5gthxk" path="res://assets/ice desert background/pause.png" id="2_i80os"]
 [ext_resource type="AudioStream" uid="uid://mcllghiuvjjx" path="res://assets/ice desert background/juego.mp3" id="2_ivj8k"]

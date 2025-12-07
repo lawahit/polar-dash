@@ -13,12 +13,12 @@ func _process(delta: float) -> void:
 
 func _on_button_pressed() -> void:
 	pass # Replace with function body.
-	get_tree().change_scene_to_file("res://mapa.tscn")
+	get_tree().change_scene_to_file("res://scenes/mapa.tscn")
 
 
 func _on_button_2_pressed() -> void:
 	pass # Replace with function body.
-	get_tree().change_scene_to_file("res://menú.tscn")
+	get_tree().change_scene_to_file("res://ui/menus/menú.tscn")
 
 
 func _on_button_3_pressed() -> void:

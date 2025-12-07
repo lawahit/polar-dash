@@ -43,7 +43,7 @@ func _physics_process(delta: float) -> void:
 	score_label.text = "SCORE: " + str(int(Global.score))
 
 func _on_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://pausa.tscn")
+	get_tree().change_scene_to_file("res://ui/overlays/pausa.tscn")
 
 func apply_slow(amount: float, duration: float):
 	slow_force = amount

@@ -1,6 +1,6 @@
 [gd_scene load_steps=13 format=3 uid="uid://bns512tnya3fb"]
 
-[ext_resource type="PackedScene" uid="uid://ca6aljkab4vfo" path="res://player.tscn" id="1_2jh14"]
+[ext_resource type="PackedScene" uid="uid://ca6aljkab4vfo" path="res://entities/player/player.tscn" id="1_2jh14"]
 [ext_resource type="AudioStream" uid="uid://ctg2dbfpbjdqs" path="res://assets/ice desert background/3 (online-audio-converter.com).mp3" id="1_w30at"]
 [ext_resource type="Texture2D" uid="uid://br4yd3m466pek" path="res://assets/ice desert background/sky.png" id="2_70f7c"]
 [ext_resource type="Texture2D" uid="uid://cdw1nti1do6ad" path="res://assets/ice desert background/sun.png" id="3_q8ihy"]
@@ -9,8 +9,8 @@
 [ext_resource type="Texture2D" uid="uid://b1xdlb7xukn61" path="res://assets/ice desert background/ground.png" id="5_auc41"]
 [ext_resource type="Texture2D" uid="uid://cqfe2g0xul4j2" path="res://assets/ice desert background/ice rocks.png" id="6_ltv3l"]
 [ext_resource type="Texture2D" uid="uid://desdhn5be3vd8" path="res://assets/ice desert background/iglu.png" id="7_w30at"]
-[ext_resource type="Script" uid="uid://bnj50u2ygf1bj" path="res://line_2d_piso.gd" id="10_2eut3"]
-[ext_resource type="PackedScene" uid="uid://c67vjqjk5smf3" path="res://seal.tscn" id="11_rugew"]
+[ext_resource type="Script" uid="uid://bnj50u2ygf1bj" path="res://entities/ground/line_2d_piso.gd" id="10_2eut3"]
+[ext_resource type="PackedScene" uid="uid://c67vjqjk5smf3" path="res://entities/seal/seal.tscn" id="11_rugew"]
 [ext_resource type="AudioStream" uid="uid://dipw4cwup5p0c" path="res://assets/Chase.mp3" id="12_o68h1"]
 
 [node name="mapa" type="Node2D"]

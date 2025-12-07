@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://c67vjqjk5smf3"]
 
 [ext_resource type="Texture2D" uid="uid://d2qhr54awx3hj" path="res://assets/__cream_seal_swim_005.png" id="1_2pijg"]
-[ext_resource type="Script" uid="uid://rynr48j4j6cq" path="res://enemy.gd" id="1_or4ip"]
+[ext_resource type="Script" uid="uid://rynr48j4j6cq" path="res://entities/seal/enemy.gd" id="1_or4ip"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_or4ip"]
 radius = 36.013885

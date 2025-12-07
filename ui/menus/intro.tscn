@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://doscbxyc6e6xo"]
 
 [ext_resource type="VideoStream" uid="uid://8wfirwx11qpv" path="res://assets/ice desert background/polarda.ogv" id="1_s2ta7"]
-[ext_resource type="Script" uid="uid://fd8inwv0v1n6" path="res://video_stream_player.gd" id="2_ayt76"]
+[ext_resource type="Script" uid="uid://fd8inwv0v1n6" path="res://ui/styles/video_stream_player.gd" id="2_ayt76"]
 
 [node name="Node2D" type="Node2D"]
 

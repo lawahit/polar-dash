@@ -1,7 +1,7 @@
 [gd_scene load_steps=13 format=3 uid="uid://b6scotbhdu43u"]
 
 [ext_resource type="Texture2D" uid="uid://bcq2aggasbb55" path="res://assets/barrel_explode.png" id="1_cbg4j"]
-[ext_resource type="Script" uid="uid://cd8h0g7aps6md" path="res://barrel.gd" id="1_kuhlg"]
+[ext_resource type="Script" uid="uid://cd8h0g7aps6md" path="res://entities/barrel/barrel.gd" id="1_kuhlg"]
 [ext_resource type="Texture2D" uid="uid://btqqf8bgt36up" path="res://assets/barrel_explode_01b.png" id="2_kuhlg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_d25dd"]
