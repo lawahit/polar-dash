@@ -1,0 +1,115 @@
+[gd_scene load_steps=10 format=3 uid="uid://baicd0o2urbcu"]
+
+[ext_resource type="Script" uid="uid://djw6i5xhyvx8x" path="res://pausa.gd" id="1_i80os"]
+[ext_resource type="FontFile" uid="uid://c3raoapdapvl7" path="res://assets/ice desert background/Polar Snow.ttf" id="2_6tq3s"]
+[ext_resource type="Texture2D" uid="uid://jxmt6k5gthxk" path="res://assets/ice desert background/pause.png" id="2_i80os"]
+[ext_resource type="AudioStream" uid="uid://mcllghiuvjjx" path="res://assets/ice desert background/juego.mp3" id="2_ivj8k"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_ivj8k"]
+texture = ExtResource("2_i80os")
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2c51a"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_6tq3s"]
+bg_color = Color(5.2943824e-07, 0.49565715, 0.49574614, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_shunq"]
+bg_color = Color(0.4544518, 0.68231916, 0.99936944, 1)
+corner_radius_top_left = 16
+corner_radius_top_right = 16
+corner_radius_bottom_right = 16
+corner_radius_bottom_left = 16
+shadow_size = 5
+shadow_offset = Vector2(0, 3.41)
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_gkko3"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_i80os")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("2_ivj8k")
+autoplay = true
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_ivj8k")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -136.625
+offset_top = -34.0
+offset_right = 136.625
+offset_bottom = 172.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 10
+
+[node name="Button" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0.57254905, 0.81960785, 1)
+theme_override_fonts/font = ExtResource("2_6tq3s")
+theme_override_font_sizes/font_size = 35
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c51a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6tq3s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shunq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gkko3")
+text = "Continue"
+
+[node name="Button2" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0.57097423, 0.82080406, 1)
+theme_override_fonts/font = ExtResource("2_6tq3s")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c51a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6tq3s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shunq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gkko3")
+text = "Menu"
+
+[node name="Button3" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_colors/font_color = Color(0, 0.57254905, 0.81960785, 1)
+theme_override_fonts/font = ExtResource("2_6tq3s")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_2c51a")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_6tq3s")
+theme_override_styles/hover = SubResource("StyleBoxFlat_shunq")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_gkko3")
+text = "Exit"
+
+[connection signal="pressed" from="VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

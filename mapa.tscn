@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=3 uid="uid://bns512tnya3fb"]
+
+[ext_resource type="PackedScene" uid="uid://ca6aljkab4vfo" path="res://player.tscn" id="1_2jh14"]
+[ext_resource type="AudioStream" uid="uid://ctg2dbfpbjdqs" path="res://assets/ice desert background/3 (online-audio-converter.com).mp3" id="1_w30at"]
+[ext_resource type="Texture2D" uid="uid://br4yd3m466pek" path="res://assets/ice desert background/sky.png" id="2_70f7c"]
+[ext_resource type="Texture2D" uid="uid://cdw1nti1do6ad" path="res://assets/ice desert background/sun.png" id="3_q8ihy"]
+[ext_resource type="Texture2D" uid="uid://dhrgpkduf44do" path="res://assets/ice desert background/mountains 2.png" id="4_ltv3l"]
+[ext_resource type="Texture2D" uid="uid://cqte7ryjqakj8" path="res://assets/ice desert background/mountains 1.png" id="4_wan0n"]
+[ext_resource type="Texture2D" uid="uid://b1xdlb7xukn61" path="res://assets/ice desert background/ground.png" id="5_auc41"]
+[ext_resource type="Texture2D" uid="uid://cqfe2g0xul4j2" path="res://assets/ice desert background/ice rocks.png" id="6_ltv3l"]
+[ext_resource type="Texture2D" uid="uid://desdhn5be3vd8" path="res://assets/ice desert background/iglu.png" id="7_w30at"]
+[ext_resource type="Script" uid="uid://bnj50u2ygf1bj" path="res://line_2d_piso.gd" id="10_2eut3"]
+[ext_resource type="PackedScene" uid="uid://c67vjqjk5smf3" path="res://seal.tscn" id="11_rugew"]
+[ext_resource type="AudioStream" uid="uid://dipw4cwup5p0c" path="res://assets/Chase.mp3" id="12_o68h1"]
+
+[node name="mapa" type="Node2D"]
+position = Vector2(-18, 92)
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("1_w30at")
+autoplay = true
+
+[node name="CharacterBody2D" parent="." instance=ExtResource("1_2jh14")]
+position = Vector2(559, -95)
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1147, 0)
+
+[node name="cielo" type="Sprite2D" parent="ParallaxBackground/ParallaxLayer"]
+position = Vector2(578.25006, 405)
+scale = Vector2(0.1616737, 0.32941175)
+texture = ExtResource("2_70f7c")
+
+[node name="sol" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_mirroring = Vector2(1147, 0)
+
+[node name="sol" type="Sprite2D" parent="ParallaxBackground/sol"]
+position = Vector2(219, 44.000004)
+scale = Vector2(0.15817432, 0.10476878)
+texture = ExtResource("3_q8ihy")
+
+[node name="montana 2" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(2, 1)
+motion_mirroring = Vector2(1147, 0)
+
+[node name="montana 2" type="Sprite2D" parent="ParallaxBackground/montana 2"]
+position = Vector2(575.625, 499)
+scale = Vector2(0.16135725, 0.056632668)
+texture = ExtResource("4_ltv3l")
+
+[node name="montana" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(3, 1)
+motion_mirroring = Vector2(1147, 0)
+
+[node name="montana" type="Sprite2D" parent="ParallaxBackground/montana"]
+position = Vector2(286, 447.78125)
+scale = Vector2(0.111493744, 0.087063804)
+texture = ExtResource("4_wan0n")
+
+[node name="nieve" type="ParallaxLayer" parent="ParallaxBackground"]
+visible = false
+motion_mirroring = Vector2(1147, 0)
+
+[node name="nieve" type="Sprite2D" parent="ParallaxBackground/nieve"]
+position = Vector2(577.75006, 576.75)
+scale = Vector2(0.16139242, 0.10714285)
+texture = ExtResource("5_auc41")
+
+[node name="iglu" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(3, 1)
+motion_mirroring = Vector2(1147, 0)
+
+[node name="iglu" type="Sprite2D" parent="ParallaxBackground/iglu"]
+position = Vector2(981, 444.99997)
+scale = Vector2(0.32054994, 0.40581718)
+texture = ExtResource("7_w30at")
+
+[node name="piedras abajo" type="ParallaxLayer" parent="ParallaxBackground"]
+motion_scale = Vector2(6, 1)
+motion_mirroring = Vector2(1147, 0)
+
+[node name="piedras abajo" type="Sprite2D" parent="ParallaxBackground/piedras abajo"]
+position = Vector2(493.54843, 587.5)
+scale = Vector2(0.14856626, 0.23910172)
+texture = ExtResource("6_ltv3l")
+
+[node name="Line2D" type="Line2D" parent="."]
+script = ExtResource("10_2eut3")
+
+[node name="Polygon2D" type="Polygon2D" parent="Line2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Line2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Line2D/StaticBody2D"]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="Seal" parent="." instance=ExtResource("11_rugew")]
+position = Vector2(367, 289)
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("12_o68h1")
+volume_db = -12.0
+autoplay = true
+parameters/looping = true

@@ -1,0 +1,10 @@
+[gd_scene load_steps=2 format=3 uid="uid://brk8yru53ysd0"]
+
+[ext_resource type="Texture2D" uid="uid://b1xdlb7xukn61" path="res://assets/ice desert background/ground.png" id="1_47poo"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+
+[node name="Polygon2D" type="Polygon2D" parent="."]
+texture = ExtResource("1_47poo")

@@ -1,0 +1,42 @@
+[gd_scene load_steps=6 format=3 uid="uid://c67vjqjk5smf3"]
+
+[ext_resource type="Texture2D" uid="uid://d2qhr54awx3hj" path="res://assets/__cream_seal_swim_005.png" id="1_2pijg"]
+[ext_resource type="Script" uid="uid://rynr48j4j6cq" path="res://enemy.gd" id="1_or4ip"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_or4ip"]
+radius = 36.013885
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_mngyh"]
+radius = 2760.1106
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fwvwd"]
+radius = 38.0
+
+[node name="Seal" type="CharacterBody2D"]
+script = ExtResource("1_or4ip")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(0.49998856, 0.31249237)
+scale = Vector2(0.093373515, 0.11144066)
+texture = ExtResource("1_2pijg")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-3, 9)
+shape = SubResource("CircleShape2D_or4ip")
+
+[node name="DetectionArea" type="Area2D" parent="."]
+visible = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionArea" groups=["enemy", "player"]]
+shape = SubResource("CircleShape2D_mngyh")
+debug_color = Color(0.29578763, 0.61994594, 0.31694797, 0.41960785)
+
+[node name="DamageArea" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DamageArea"]
+position = Vector2(-3, 9)
+shape = SubResource("CircleShape2D_fwvwd")
+debug_color = Color(0.9514573, 0.15469226, 0.4079886, 0.41960785)
+
+[connection signal="body_entered" from="DetectionArea" to="." method="_on_detection_area_body_entered"]
+[connection signal="body_exited" from="DetectionArea" to="." method="_on_detection_area_body_exited"]
