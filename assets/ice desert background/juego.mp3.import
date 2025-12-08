@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://mcllghiuvjjx"
+path="res://.godot/imported/juego.mp3-1dc9de57a9fabfd9983fd9ac186ecf92.mp3str"
+
+[deps]
+
+source_file="res://assets/ice desert background/juego.mp3"
+dest_files=["res://.godot/imported/juego.mp3-1dc9de57a9fabfd9983fd9ac186ecf92.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

@@ -1,0 +1,88 @@
+[gd_scene load_steps=13 format=3 uid="uid://b6scotbhdu43u"]
+
+[ext_resource type="Texture2D" uid="uid://bcq2aggasbb55" path="res://assets/barrel_explode.png" id="1_cbg4j"]
+[ext_resource type="Script" uid="uid://cd8h0g7aps6md" path="res://entities/barrel/barrel.gd" id="1_kuhlg"]
+[ext_resource type="Texture2D" uid="uid://btqqf8bgt36up" path="res://assets/barrel_explode_01b.png" id="2_kuhlg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_d25dd"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(0, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8ewdp"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(512, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_mhx4p"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(1024, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_h5cnk"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(1536, 0, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_r7t44"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(0, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_l5boy"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(512, 512, 512, 512)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_0p371"]
+atlas = ExtResource("1_cbg4j")
+region = Rect2(1024, 512, 512, 512)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_bo8cv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_d25dd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8ewdp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_mhx4p")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_h5cnk")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_r7t44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_l5boy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_0p371")
+}],
+"loop": false,
+"name": &"break",
+"speed": 11.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_kuhlg")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_gaenx"]
+radius = 15.0
+height = 40.0
+
+[node name="Barrel" type="Area2D"]
+script = ExtResource("1_kuhlg")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.1, 0.1)
+sprite_frames = SubResource("SpriteFrames_bo8cv")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+shape = SubResource("CapsuleShape2D_gaenx")
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.3
+one_shot = true

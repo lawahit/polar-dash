@@ -1,0 +1,116 @@
+[gd_scene load_steps=10 format=3 uid="uid://cei0rphcbwd5e"]
+
+[ext_resource type="Script" uid="uid://b8ma8y70gcupo" path="res://ui/overlays/game_over.gd" id="1_40baj"]
+[ext_resource type="Texture2D" uid="uid://ojsxjnbpwaep" path="res://assets/gameover.png" id="2_3w721"]
+[ext_resource type="AudioStream" uid="uid://bu3ph7d018ni2" path="res://assets/sad_game_over.wav" id="2_a1htc"]
+[ext_resource type="FontFile" uid="uid://c3raoapdapvl7" path="res://assets/ice desert background/Polar Snow.ttf" id="3_3w721"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_dg5qj"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.019277714, 0.2725573, 0.46047533, 0.6)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3w721"]
+bg_color = Color(0.76862746, 0.84705883, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.019277714, 0.2725573, 0.46047533, 0.6)
+shadow_size = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p1nwx"]
+bg_color = Color(0.76862746, 0.84705883, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.019277714, 0.2725573, 0.46047533, 0.6)
+shadow_size = 5
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_v7vhe"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_34amp"]
+bg_color = Color(1, 1, 1, 1)
+corner_radius_top_left = 20
+corner_radius_top_right = 20
+corner_radius_bottom_right = 20
+corner_radius_bottom_left = 20
+shadow_color = Color(0.019607844, 0.27450982, 0.45882353, 0.6)
+shadow_size = 5
+
+[node name="GameOver" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_40baj")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 3042.1052
+offset_bottom = 1696.0
+scale = Vector2(0.38, 0.38)
+texture = ExtResource("2_3w721")
+
+[node name="FinalScore" type="Label" parent="."]
+layout_mode = 0
+offset_left = 500.0
+offset_top = 346.0
+offset_right = 637.0
+offset_bottom = 381.0
+theme_override_colors/font_color = Color(0.11764706, 0.5647059, 1, 1)
+theme_override_fonts/font = ExtResource("3_3w721")
+theme_override_font_sizes/font_size = 25
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 447.0
+offset_top = 442.0
+offset_right = 772.0
+offset_bottom = 581.0
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_constants/separation = 25
+
+[node name="ReintentarButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_fonts/font = ExtResource("3_3w721")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_dg5qj")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3w721")
+theme_override_styles/hover = SubResource("StyleBoxFlat_p1nwx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7vhe")
+text = "Reintentar"
+
+[node name="MenuButton" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_colors/font_focus_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_colors/font_pressed_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_colors/font_hover_color = Color(0, 0.60784316, 0.7529412, 1)
+theme_override_fonts/font = ExtResource("3_3w721")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/normal = SubResource("StyleBoxFlat_34amp")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_3w721")
+theme_override_styles/hover = SubResource("StyleBoxFlat_p1nwx")
+theme_override_styles/focus = SubResource("StyleBoxEmpty_v7vhe")
+text = "Ir al menú"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_a1htc")
+volume_db = -15.0
+
+[connection signal="pressed" from="VBoxContainer/ReintentarButton" to="." method="_on_reintentar_button_pressed"]
+[connection signal="pressed" from="VBoxContainer/MenuButton" to="." method="_on_menu_button_pressed"]
